@@ -1,10 +1,13 @@
 import 'dart:ui';
 
+import 'package:custom_popup/custom_popup.dart';
 import 'package:flutter/material.dart';
 
-class CustomPopupThemeExtension
-    extends ThemeExtension<CustomPopupThemeExtension> {
+class CustomPopupTheme
+    extends ThemeExtension<CustomPopupTheme> {
   final Color? backgroundColor;
+
+  final CustomPopupPosition position;
 
   final double width;
 
@@ -14,8 +17,9 @@ class CustomPopupThemeExtension
   final double smallSpacing;
   final double defaultSpacing;
 
-  const CustomPopupThemeExtension({
+  const CustomPopupTheme({
     this.backgroundColor,
+    this.position = CustomPopupPosition.relative,
     this.width = 200,
     this.smallBorderRadius = 4,
     this.borderRadius = 8,
@@ -24,17 +28,18 @@ class CustomPopupThemeExtension
   });
 
   @override
-  CustomPopupThemeExtension copyWith({
+  CustomPopupTheme copyWith({
     Color? backgroundColor,
-    Color? borderColor,
+    CustomPopupPosition? position,
     double? width,
     double? smallBorderRadius,
     double? borderRadius,
     double? smallSpacing,
     double? defaultSpacing,
   }) {
-    return CustomPopupThemeExtension(
+    return CustomPopupTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      position: position ?? this.position,
       width: width ?? this.width,
       smallBorderRadius: smallBorderRadius ?? this.smallBorderRadius,
       borderRadius: borderRadius ?? this.borderRadius,
@@ -44,14 +49,15 @@ class CustomPopupThemeExtension
   }
 
   @override
-  CustomPopupThemeExtension lerp(
-      ThemeExtension<CustomPopupThemeExtension>? other, double t) {
-    if (other is! CustomPopupThemeExtension) {
+  CustomPopupTheme lerp(
+      ThemeExtension<CustomPopupTheme>? other, double t) {
+    if (other is! CustomPopupTheme) {
       return this;
     }
 
-    return CustomPopupThemeExtension(
+    return CustomPopupTheme(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
+      position: other.position,
       width: lerpDouble(width, other.width, t)!,
       smallBorderRadius:
           lerpDouble(smallBorderRadius, other.smallBorderRadius, t)!,
@@ -61,5 +67,6 @@ class CustomPopupThemeExtension
     );
   }
 
-  static CustomPopupThemeExtension fallback() => const CustomPopupThemeExtension();
+  static CustomPopupTheme fallback() =>
+      const CustomPopupTheme();
 }
