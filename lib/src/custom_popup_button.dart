@@ -1,3 +1,4 @@
+import 'package:custom_popup/custom_popup.dart';
 import 'package:custom_popup/src/custom_popup_button_element.dart';
 import 'package:flutter/material.dart';
 
@@ -21,10 +22,11 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
   final OverlayPortalController _portalController = OverlayPortalController();
   GlobalKey iconButtonKey = GlobalKey();
 
-  static const double _popupMenuWitdth = 230;
-
   @override
   Widget build(BuildContext context) {
+    final customPopupButtonTheme =
+        Theme.of(context).extension<CustomPopupThemeExtension>()!;
+
     return IconButton(
       key: iconButtonKey,
       icon: OverlayPortal(
@@ -35,27 +37,35 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
           Offset position = iconButtonBox.localToGlobal(Offset.zero);
 
           return Positioned(
-            top: position.dy + iconButtonBox.size.height,
+            top: position.dy +
+                iconButtonBox.size.height +
+                customPopupButtonTheme.smallSpacing,
             left: position.dx -
-                _popupMenuWitdth / 2 +
+                customPopupButtonTheme.width / 2 +
                 iconButtonBox.size.width / 2,
             child: Container(
-              width: _popupMenuWitdth,
-              padding: const EdgeInsets.all(8),
+              width: customPopupButtonTheme.width,
+              padding: EdgeInsets.all(customPopupButtonTheme.defaultSpacing),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(8),
+                color: customPopupButtonTheme.backgroundColor ??
+                    Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(customPopupButtonTheme.borderRadius),
                 ),
-                border: Border.all(),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                ),
               ),
               child: Column(
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
                     child: IconButton(
-                      icon:
-                          widget.closeIcon ?? const Icon(Icons.cancel_outlined),
+                      icon: widget.closeIcon ??
+                          const Icon(
+                            Icons.cancel_outlined,
+                          ),
+                      color: Theme.of(context).colorScheme.outline,
                       constraints: const BoxConstraints(),
                       padding: EdgeInsets.zero,
                       onPressed: () {
@@ -63,7 +73,7 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: customPopupButtonTheme.defaultSpacing),
                   ...widget.items,
                 ],
               ),
@@ -73,13 +83,17 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
         child: widget.icon,
       ),
       style: IconButton.styleFrom(
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
           borderRadius: BorderRadius.all(
-            Radius.circular(8),
+            Radius.circular(customPopupButtonTheme.borderRadius),
           ),
         ),
-        padding: const EdgeInsets.all(4),
+        backgroundColor: customPopupButtonTheme.backgroundColor ??
+            Theme.of(context).colorScheme.surface,
+        padding: EdgeInsets.all(customPopupButtonTheme.smallSpacing),
       ),
       constraints: const BoxConstraints(),
       onPressed: () {

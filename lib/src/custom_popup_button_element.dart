@@ -1,3 +1,4 @@
+import 'package:custom_popup/custom_popup.dart';
 import 'package:flutter/material.dart';
 
 sealed class CustomPopupMenuElement extends Widget {
@@ -61,10 +62,17 @@ class CustomPopupMenuDivider extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final customPopupButtonTheme =
+        Theme.of(context).extension<CustomPopupThemeExtension>()!;
+
     return Container(
       height: 1,
-      color: Colors.grey[300],
-      margin: const EdgeInsets.all(4),
+      margin: EdgeInsets.all(customPopupButtonTheme.smallSpacing),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.outlineVariant,
+        borderRadius:
+            BorderRadius.circular(customPopupButtonTheme.borderRadius),
+      ),
     );
   }
 }
