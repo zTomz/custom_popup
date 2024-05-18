@@ -20,17 +20,21 @@ class CustomPopupButtonItem extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final customPopupButtonTheme =
+        Theme.of(context).extension<CustomPopupThemeExtension>() ??
+            CustomPopupThemeExtension.fallback();
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(4),
+          borderRadius: BorderRadius.all(
+            Radius.circular(customPopupButtonTheme.smallBorderRadius),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: EdgeInsets.all(customPopupButtonTheme.smallSpacing),
             child: Row(
               children: [
                 IconTheme(
@@ -39,7 +43,7 @@ class CustomPopupButtonItem extends StatelessWidget
                   ),
                   child: icon,
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: customPopupButtonTheme.defaultSpacing),
                 Text(
                   label,
                   style: const TextStyle(
@@ -63,7 +67,8 @@ class CustomPopupMenuDivider extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final customPopupButtonTheme =
-        Theme.of(context).extension<CustomPopupThemeExtension>()!;
+        Theme.of(context).extension<CustomPopupThemeExtension>() ??
+            CustomPopupThemeExtension.fallback();
 
     return Container(
       height: 1,

@@ -1,6 +1,5 @@
-import 'package:custom_popup/custom_popup.dart';
-import 'package:custom_popup/src/custom_popup_button_element.dart';
 import 'package:flutter/material.dart';
+import 'package:custom_popup/custom_popup.dart';
 
 class CustomPopupButton extends StatefulWidget {
   final Widget icon;
@@ -25,7 +24,8 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
   @override
   Widget build(BuildContext context) {
     final customPopupButtonTheme =
-        Theme.of(context).extension<CustomPopupThemeExtension>()!;
+        Theme.of(context).extension<CustomPopupThemeExtension>() ??
+            CustomPopupThemeExtension.fallback();
 
     return IconButton(
       key: iconButtonKey,

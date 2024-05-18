@@ -59,7 +59,7 @@ class MainApp extends StatelessWidget {
               CustomPopupButtonItem(
                 label: 'Delete',
                 icon: PhosphorIcon(
-                  PhosphorIcons.share(),
+                  PhosphorIcons.trash(),
                 ),
                 onTap: () {},
               ),

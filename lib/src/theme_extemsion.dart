@@ -8,6 +8,7 @@ class CustomPopupThemeExtension
 
   final double width;
 
+  final double smallBorderRadius;
   final double borderRadius;
 
   final double smallSpacing;
@@ -16,6 +17,7 @@ class CustomPopupThemeExtension
   const CustomPopupThemeExtension({
     this.backgroundColor,
     this.width = 200,
+    this.smallBorderRadius = 4,
     this.borderRadius = 8,
     this.smallSpacing = 4,
     this.defaultSpacing = 8,
@@ -26,6 +28,7 @@ class CustomPopupThemeExtension
     Color? backgroundColor,
     Color? borderColor,
     double? width,
+    double? smallBorderRadius,
     double? borderRadius,
     double? smallSpacing,
     double? defaultSpacing,
@@ -33,6 +36,7 @@ class CustomPopupThemeExtension
     return CustomPopupThemeExtension(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       width: width ?? this.width,
+      smallBorderRadius: smallBorderRadius ?? this.smallBorderRadius,
       borderRadius: borderRadius ?? this.borderRadius,
       smallSpacing: smallSpacing ?? this.smallSpacing,
       defaultSpacing: defaultSpacing ?? this.defaultSpacing,
@@ -49,9 +53,13 @@ class CustomPopupThemeExtension
     return CustomPopupThemeExtension(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
       width: lerpDouble(width, other.width, t)!,
+      smallBorderRadius:
+          lerpDouble(smallBorderRadius, other.smallBorderRadius, t)!,
       borderRadius: lerpDouble(borderRadius, other.borderRadius, t)!,
       smallSpacing: lerpDouble(smallSpacing, other.smallSpacing, t)!,
       defaultSpacing: lerpDouble(defaultSpacing, other.defaultSpacing, t)!,
     );
   }
+
+  static CustomPopupThemeExtension fallback() => const CustomPopupThemeExtension();
 }
