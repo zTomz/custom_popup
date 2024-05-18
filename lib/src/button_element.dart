@@ -7,10 +7,16 @@ sealed class CustomPopupMenuElement extends Widget {
 
 class CustomPopupButtonItem extends StatelessWidget
     implements CustomPopupMenuElement {
+  /// The label of the button
   final String label;
+
+  /// The icon of the button
   final Widget icon;
+
+  /// The function that is called when the button is pressed
   final void Function() onTap;
 
+  /// A button in the popup
   const CustomPopupButtonItem({
     super.key,
     required this.label,
@@ -62,6 +68,7 @@ class CustomPopupButtonItem extends StatelessWidget
 
 class CustomPopupMenuDivider extends StatelessWidget
     implements CustomPopupMenuElement {
+  /// Used to divide the items in the menu
   const CustomPopupMenuDivider({super.key});
 
   @override
