@@ -1,6 +1,5 @@
 import 'package:custom_popup/custom_popup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 void main() {
@@ -99,6 +98,7 @@ class CustomButton extends StatelessWidget {
           icon: PhosphorIcon(
             PhosphorIcons.trash(),
           ),
+          foregroundColor: Colors.red,
           onTap: () {},
         ),
       ],

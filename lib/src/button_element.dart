@@ -21,6 +21,9 @@ class CustomPopupButtonItem extends StatelessWidget
   /// The height of the button, default is 35
   final double height;
 
+  /// The foreground color of the button
+  final Color? foregroundColor;
+
   /// A button in the popup
   const CustomPopupButtonItem({
     super.key,
@@ -28,39 +31,50 @@ class CustomPopupButtonItem extends StatelessWidget
     required this.icon,
     required this.onTap,
     this.height = 35,
+    this.foregroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
     final customPopupButtonTheme = context.customPopupTheme;
 
+    // ignore: no_leading_underscores_for_local_identifiers
+    final _foregroundColor =
+        foregroundColor ?? Theme.of(context).colorScheme.onSurface;
+
     return SizedBox(
       height: height,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2),
+        padding: EdgeInsets.symmetric(
+          vertical: customPopupButtonTheme.buttonTheme.spacing,
+        ),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
             borderRadius: BorderRadius.all(
-              Radius.circular(customPopupButtonTheme.smallBorderRadius),
+              Radius.circular(customPopupButtonTheme.buttonTheme.borderRadius),
             ),
             child: Padding(
-              padding: EdgeInsets.all(customPopupButtonTheme.smallSpacing),
+              padding: EdgeInsets.all(
+                customPopupButtonTheme.buttonTheme.padding,
+              ),
               child: Row(
                 children: [
                   IconTheme(
-                    data: const IconThemeData(
+                    data: IconThemeData(
                       size: 18,
+                      color: _foregroundColor,
                     ),
                     child: icon,
                   ),
                   SizedBox(width: customPopupButtonTheme.defaultSpacing),
                   Text(
                     label,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
+                      color: _foregroundColor,
                     ),
                   ),
                 ],
@@ -97,8 +111,9 @@ class CustomPopupMenuDivider extends StatelessWidget
       margin: EdgeInsets.all(customPopupButtonTheme.smallSpacing),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.outlineVariant,
-        borderRadius:
-            BorderRadius.circular(customPopupButtonTheme.borderRadius),
+        borderRadius: BorderRadius.circular(
+          customPopupButtonTheme.borderRadius,
+        ),
       ),
     );
   }
