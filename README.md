@@ -1,39 +1,49 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Custom Popup
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A highly customizable popup widget, that is easy to integrate into your code.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Custom Popup is a highly customizable popup widget, that is easy to integrate into your code.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Just add the widget in your code. The example below shows how to use the widget with [Phosphor icons package](https://pub.dev/packages/phosphor_flutter).
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```Dart
+CustomPopupButton(
+    icon: PhosphorIcon(
+        PhosphorIcons.dotsThreeVertical(),
+    ),
+    closeIcon: PhosphorIcon(
+        PhosphorIcons.xCircle(),
+    ),
+    items: [
+        CustomPopupButtonItem(
+            label: 'Edit',
+            icon: PhosphorIcon(
+            PhosphorIcons.pencilLine(),
+            ),
+            onTap: () {},
+        ),
+        CustomPopupButtonItem(
+            label: 'Duplicate',
+            icon: PhosphorIcon(
+                PhosphorIcons.copy(),
+            ),
+            onTap: () {},
+        ),
+        ...
+        const CustomPopupMenuDivider(),
+        CustomPopupButtonItem(
+            label: 'Delete',
+            icon: PhosphorIcon(
+                PhosphorIcons.trash(),
+            ),
+            foregroundColor: Colors.red,
+            onTap: () {},
+        ),
+    ],
+)
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.

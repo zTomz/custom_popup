@@ -1,7 +1,8 @@
 name: custom_popup
-description: "A new Flutter package project."
-version: 0.0.1
+description: "A highly customizable popup widget, which is easy to integrate with your app."
+version: 1.0.0
 homepage:
+repository: https://github.com/zTomz/custom_popup
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -11,9 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_animate: ^4.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
   flutter_lints: ^3.0.0
 
 flutter:
