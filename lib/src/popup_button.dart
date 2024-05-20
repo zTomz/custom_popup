@@ -2,6 +2,7 @@ import 'package:custom_popup/extensions/theme_extension.dart';
 import 'package:custom_popup/src/close_button.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_popup/custom_popup.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class CustomPopupButton extends StatefulWidget {
   /// The icon that opens the popup
@@ -164,7 +165,11 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
           ...widget.items,
         ],
       ),
-    );
+    ).animate().scale(
+      alignment: Alignment.topCenter,
+          curve: Curves.easeIn,
+          duration: const Duration(milliseconds: 120),
+        );
 
     if (position == CustomPopupPosition.centered) {
       return Center(
