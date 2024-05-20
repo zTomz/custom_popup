@@ -25,55 +25,65 @@ class CustomPopupTheme extends ThemeExtension<CustomPopupTheme> {
   /// Defaults to [CustomPopupThemeDefaults.defaultWidth].
   final double width;
 
-  /// The radius of the corners of the popup menu's small elements.
+  /// The radius of the corners of the popup menu's button.
   ///
   /// Defaults to [CustomPopupThemeDefaults.defaultSmallBorderRadius].
-  final double smallBorderRadius;
+  final double buttonRadius;
 
   /// The radius of the corners of the popup menu's large elements.
   ///
   /// Defaults to [CustomPopupThemeDefaults.defaultBorderRadius].
   final double borderRadius;
 
-  /// The spacing between small elements in the popup menu.
+  /// The spacing between the button in the popup menu.
   ///
   /// Defaults to [CustomPopupThemeDefaults.defaultSmallSpacing].
-  final double smallSpacing;
+  final double itemSpacing;
 
   /// The spacing between default elements in the popup menu.
   ///
   /// Defaults to [CustomPopupThemeDefaults.defaultSpacing].
-  final double defaultSpacing;
+  final double spacing;
+
+  /// The padding of the button to open the popup
+  ///
+  /// Defaults to [CustomPopupThemeDefaults.defaultSmallSpacing].
+  final double buttonPadding;
 
   const CustomPopupTheme({
     this.backgroundColor,
     this.position = CustomPopupPosition.relative,
     this.buttonTheme = const CustomPopupButtonTheme(),
     this.width = CustomPopupThemeDefaults.defaultWidth,
-    this.smallBorderRadius = CustomPopupThemeDefaults.defaultSmallBorderRadius,
+    this.buttonRadius = CustomPopupThemeDefaults.defaultSmallBorderRadius,
     this.borderRadius = CustomPopupThemeDefaults.defaultBorderRadius,
-    this.smallSpacing = CustomPopupThemeDefaults.defaultSmallSpacing,
-    this.defaultSpacing = CustomPopupThemeDefaults.defaultSpacing,
+    this.itemSpacing = CustomPopupThemeDefaults.defaultSmallSpacing,
+    this.spacing = CustomPopupThemeDefaults.defaultSpacing,
+    this.buttonPadding = CustomPopupThemeDefaults.defaultSmallSpacing,
   });
 
   @override
   CustomPopupTheme copyWith({
     Color? backgroundColor,
     CustomPopupPosition? position,
+    CustomPopupButtonTheme? buttonTheme,
     double? width,
-    double? smallBorderRadius,
+    double? buttonRadius,
     double? borderRadius,
-    double? smallSpacing,
-    double? defaultSpacing,
+    double? itemSpacing,
+    double? spacing,
+    double? buttonPadding,
   }) {
     return CustomPopupTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       position: position ?? this.position,
+      buttonTheme: buttonTheme ?? this.buttonTheme,
       width: width ?? this.width,
-      smallBorderRadius: smallBorderRadius ?? this.smallBorderRadius,
+      buttonRadius: buttonRadius ?? this.buttonRadius,
       borderRadius: borderRadius ?? this.borderRadius,
-      smallSpacing: smallSpacing ?? this.smallSpacing,
-      defaultSpacing: defaultSpacing ?? this.defaultSpacing,
+      itemSpacing: itemSpacing ?? this.itemSpacing,
+      spacing: spacing ?? this.spacing,
+      buttonPadding: buttonPadding ?? this.buttonPadding,
     );
   }
 
@@ -88,14 +98,15 @@ class CustomPopupTheme extends ThemeExtension<CustomPopupTheme> {
       position: other.position,
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       width: lerpDouble(width, other.width, t)!,
-      smallBorderRadius: lerpDouble(
-        smallBorderRadius,
-        other.smallBorderRadius,
+      buttonRadius: lerpDouble(
+        buttonRadius,
+        other.buttonRadius,
         t,
       )!,
       borderRadius: lerpDouble(borderRadius, other.borderRadius, t)!,
-      smallSpacing: lerpDouble(smallSpacing, other.smallSpacing, t)!,
-      defaultSpacing: lerpDouble(defaultSpacing, other.defaultSpacing, t)!,
+      itemSpacing: lerpDouble(itemSpacing, other.itemSpacing, t)!,
+      spacing: lerpDouble(spacing, other.spacing, t)!,
+      buttonPadding: lerpDouble(buttonPadding, other.buttonPadding, t)!,
     );
   }
 
@@ -103,11 +114,11 @@ class CustomPopupTheme extends ThemeExtension<CustomPopupTheme> {
 }
 
 class CustomPopupButtonTheme extends ThemeExtension<CustomPopupButtonTheme> {
-  /// Background color of the button. If null, the default color is used.
-  final Color? backgroundColor;
-
   /// Foreground color of the button. If null, the default color is used.
   final Color? foregroundColor;
+
+  /// Background color of the button. If null, the default color is used.
+  final Color? backgroundColor;
 
   /// Padding of the button.
   /// The default padding is [CustomPopupThemeDefaults.defaultSmallSpacing].

@@ -15,14 +15,53 @@ class CustomPopupButton extends StatefulWidget {
   /// Choose between [CustomPopupButtonItem] and [CustomPopupMenuDivider]
   final List<CustomPopupMenuElement> items;
 
+  /// The background color of the popup
+  ///
+  /// If not set it will default to the surface color of the theme
+  final Color? backgroundColor;
+
+  /// The position of the popup
+  ///
+  /// If not set it will default to the position of the theme
   final CustomPopupPosition? position;
+
+  /// The width of the popup
+  ///
+  /// If not set it will default to the width of the theme
+  final double? width;
+
+  /// The border radius of the popup
+  ///
+  /// If not set it will default to the border radius of the theme
+  final double? buttonRadius;
+
+  /// The border radius of the popup
+  ///
+  /// If not set it will default to the border radius of the theme
+  final double? borderRadius;
+
+  /// The spacing between the elements
+  ///
+  /// If not set it will default to the spacing of the theme
+  final double? spacing;
+
+  /// The padding of the button
+  ///
+  /// If not set it will default to the padding of the theme
+  final double? buttonPadding;
 
   const CustomPopupButton({
     super.key,
     required this.icon,
-    this.closeIcon,
     required this.items,
+    this.closeIcon,
+    this.backgroundColor,
     this.position,
+    this.width,
+    this.buttonRadius,
+    this.borderRadius,
+    this.spacing,
+    this.buttonPadding,
   });
 
   @override
@@ -37,13 +76,31 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
   Widget build(BuildContext context) {
     final customPopupButtonTheme = context.customPopupTheme;
 
+    final double width = widget.width ?? customPopupButtonTheme.width;
+    final double spacing = widget.spacing ?? customPopupButtonTheme.spacing;
+    final Color backgroundColor = widget.backgroundColor ??
+        customPopupButtonTheme.backgroundColor ??
+        Theme.of(context).colorScheme.surface;
+    final double buttonRadius =
+        widget.buttonRadius ?? customPopupButtonTheme.buttonRadius;
+    final double borderRadius =
+        widget.borderRadius ?? customPopupButtonTheme.borderRadius;
+    final CustomPopupPosition position =
+        widget.position ?? customPopupButtonTheme.position;
+    final double buttonPadding =
+        widget.buttonPadding ?? customPopupButtonTheme.buttonPadding;
+
     return IconButton(
       key: _iconButtonKey,
       icon: OverlayPortal(
         controller: _portalController,
         overlayChildBuilder: (context) => popupMenuBuilder(
           context,
-          customPopupButtonTheme,
+          width: width,
+          spacing: spacing,
+          borderRadius: borderRadius,
+          backgroundColor: backgroundColor,
+          position: position,
         ),
         child: widget.icon,
       ),
@@ -53,12 +110,11 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
             color: Theme.of(context).colorScheme.outlineVariant,
           ),
           borderRadius: BorderRadius.all(
-            Radius.circular(customPopupButtonTheme.borderRadius),
+            Radius.circular(buttonRadius),
           ),
         ),
-        backgroundColor: customPopupButtonTheme.backgroundColor ??
-            Theme.of(context).colorScheme.surface,
-        padding: EdgeInsets.all(customPopupButtonTheme.smallSpacing),
+        backgroundColor: backgroundColor,
+        padding: EdgeInsets.all(buttonPadding),
       ),
       constraints: const BoxConstraints(),
       onPressed: () {
@@ -68,18 +124,25 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
   }
 
   /// This builds the popup menu
-  Widget popupMenuBuilder(BuildContext context, CustomPopupTheme theme) {
+  Widget popupMenuBuilder(
+    BuildContext context, {
+    required double width,
+    required double spacing,
+    required double borderRadius,
+    required Color backgroundColor,
+    required CustomPopupPosition position,
+  }) {
     RenderBox iconButtonBox =
         _iconButtonKey.currentContext?.findRenderObject() as RenderBox;
 
     late Offset buttonPosition;
     final Widget popupMenu = Container(
-      width: theme.width,
-      padding: EdgeInsets.all(theme.defaultSpacing),
+      width: width,
+      padding: EdgeInsets.all(spacing),
       decoration: BoxDecoration(
-        color: theme.backgroundColor ?? Theme.of(context).colorScheme.surface,
+        color: backgroundColor,
         borderRadius: BorderRadius.all(
-          Radius.circular(theme.borderRadius),
+          Radius.circular(borderRadius),
         ),
         border: Border.all(
           color: Theme.of(context).colorScheme.outlineVariant,
@@ -97,41 +160,29 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
               _portalController.hide();
             },
           ),
-          SizedBox(height: theme.defaultSpacing),
+          SizedBox(height: spacing),
           ...widget.items,
         ],
       ),
     );
 
-    if (widget.position == CustomPopupPosition.centered) {
+    if (position == CustomPopupPosition.centered) {
       return Center(
         child: popupMenu,
       );
-    } else if (widget.position == CustomPopupPosition.relative) {
+    } else {
       buttonPosition = _calculateRelativePosition(
         context,
         iconButtonBox,
-        widget.position!,
+        position,
       );
-    } else {
-      if (theme.position == CustomPopupPosition.centered) {
-        return Center(
-          child: popupMenu,
-        );
-      } else {
-        buttonPosition = _calculateRelativePosition(
-          context,
-          iconButtonBox,
-          theme.position,
-        );
-      }
-    }
 
-    return Positioned(
-      top: buttonPosition.dy,
-      left: buttonPosition.dx,
-      child: popupMenu,
-    );
+      return Positioned(
+        top: buttonPosition.dy,
+        left: buttonPosition.dx,
+        child: popupMenu,
+      );
+    }
   }
 
   /// This function calculates the relative position of the popup to the button
@@ -149,7 +200,7 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
     final bool displayAbove = buttonPosition.dy +
             iconButtonBox.size.height +
             popupMenuSize.height +
-            theme.smallSpacing >
+            theme.itemSpacing >
         screenSize.height;
     final double relativeXPosition =
         (buttonPosition.dx + iconButtonBox.size.width / 2) / screenSize.width;
@@ -160,9 +211,9 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
       displayAbove
           ? buttonPosition.dy -
               popupMenuSize.height -
-              theme.smallSpacing -
+              theme.itemSpacing -
               2 // - 2 because of the border allignment
-          : buttonPosition.dy + iconButtonBox.size.height + theme.smallSpacing,
+          : buttonPosition.dy + iconButtonBox.size.height + theme.itemSpacing,
     );
   }
 
@@ -172,9 +223,9 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
   ) {
     double height = 0;
 
-    height += theme.defaultSpacing * 2;
+    height += theme.spacing * 2;
     height += CustomPopupCloseButton.size;
-    height += theme.defaultSpacing;
+    height += theme.spacing;
 
     for (CustomPopupMenuElement item in widget.items) {
       height += item.calculateWidgetHeight(context);

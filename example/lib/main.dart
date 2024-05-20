@@ -102,7 +102,6 @@ class CustomButton extends StatelessWidget {
           onTap: () {},
         ),
       ],
-      position: CustomPopupPosition.relative,
     );
   }
 }

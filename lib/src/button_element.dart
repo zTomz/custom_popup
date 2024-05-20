@@ -21,8 +21,14 @@ class CustomPopupButtonItem extends StatelessWidget
   /// The height of the button, default is 35
   final double height;
 
+  /// The space between the icon and the label
+  final double? spacing;
+
   /// The foreground color of the button
   final Color? foregroundColor;
+
+  /// The background color of the button
+  final Color? backgroundColor;
 
   /// A button in the popup
   const CustomPopupButtonItem({
@@ -31,16 +37,20 @@ class CustomPopupButtonItem extends StatelessWidget
     required this.icon,
     required this.onTap,
     this.height = 35,
+    this.spacing,
     this.foregroundColor,
+    this.backgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
     final customPopupButtonTheme = context.customPopupTheme;
 
-    // ignore: no_leading_underscores_for_local_identifiers
-    final _foregroundColor =
-        foregroundColor ?? Theme.of(context).colorScheme.onSurface;
+    final double spacing = this.spacing ?? customPopupButtonTheme.spacing;
+    final foregroundColor =
+        this.foregroundColor ?? Theme.of(context).colorScheme.onSurface;
+    final Color backgroundColor =
+        this.backgroundColor ?? Theme.of(context).colorScheme.surface;
 
     return SizedBox(
       height: height,
@@ -49,7 +59,7 @@ class CustomPopupButtonItem extends StatelessWidget
           vertical: customPopupButtonTheme.buttonTheme.spacing,
         ),
         child: Material(
-          color: Colors.transparent,
+          color: backgroundColor,
           child: InkWell(
             onTap: onTap,
             borderRadius: BorderRadius.all(
@@ -64,17 +74,17 @@ class CustomPopupButtonItem extends StatelessWidget
                   IconTheme(
                     data: IconThemeData(
                       size: 18,
-                      color: _foregroundColor,
+                      color: foregroundColor,
                     ),
                     child: icon,
                   ),
-                  SizedBox(width: customPopupButtonTheme.defaultSpacing),
+                  SizedBox(width: spacing),
                   Text(
                     label,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: _foregroundColor,
+                      color: foregroundColor,
                     ),
                   ),
                 ],
@@ -108,7 +118,7 @@ class CustomPopupMenuDivider extends StatelessWidget
 
     return Container(
       height: height,
-      margin: EdgeInsets.all(customPopupButtonTheme.smallSpacing),
+      margin: EdgeInsets.all(customPopupButtonTheme.itemSpacing),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.outlineVariant,
         borderRadius: BorderRadius.circular(
@@ -120,5 +130,5 @@ class CustomPopupMenuDivider extends StatelessWidget
 
   @override
   double Function(BuildContext context) get calculateWidgetHeight =>
-      (context) => height + context.customPopupTheme.smallSpacing * 2;
+      (context) => height + context.customPopupTheme.itemSpacing * 2;
 }
