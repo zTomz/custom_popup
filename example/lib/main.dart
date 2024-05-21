@@ -24,25 +24,35 @@ class MainApp extends StatelessWidget {
             Positioned(
               top: 20,
               left: 20,
-              child: CustomButton(),
+              child: CustomButton(
+                animationAlignment: Alignment.topLeft,
+              ),
             ),
             Positioned(
               top: 20,
               right: 20,
-              child: CustomButton(),
+              child: CustomButton(
+                animationAlignment: Alignment.topRight,
+              ),
             ),
             Positioned(
               bottom: 20,
               left: 20,
-              child: CustomButton(),
+              child: CustomButton(
+                animationAlignment: Alignment.bottomLeft,
+              ),
             ),
             Positioned(
               bottom: 20,
               right: 20,
-              child: CustomButton(),
+              child: CustomButton(
+                animationAlignment: Alignment.bottomRight,
+              ),
             ),
             Center(
-              child: CustomButton(),
+              child: CustomButton(
+                animationAlignment: Alignment.topCenter,
+              ),
             ),
           ],
         ),
@@ -52,7 +62,12 @@ class MainApp extends StatelessWidget {
 }
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
+  final Alignment animationAlignment;
+
+  const CustomButton({
+    super.key,
+    required this.animationAlignment,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +117,7 @@ class CustomButton extends StatelessWidget {
           onTap: () {},
         ),
       ],
+      animationAlignment: animationAlignment,
     );
   }
 }

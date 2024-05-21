@@ -51,6 +51,11 @@ class CustomPopupButton extends StatefulWidget {
   /// If not set it will default to the padding of the theme
   final double? buttonPadding;
 
+  /// From where the scale animation starts.
+  ///
+  /// Defaults to [Alignment.topCenter]
+  final Alignment animationAlignment;
+
   const CustomPopupButton({
     super.key,
     required this.icon,
@@ -63,6 +68,7 @@ class CustomPopupButton extends StatefulWidget {
     this.borderRadius,
     this.spacing,
     this.buttonPadding,
+    this.animationAlignment = Alignment.topCenter,
   });
 
   @override
@@ -166,7 +172,7 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
         ],
       ),
     ).animate().scale(
-      alignment: Alignment.topCenter,
+          alignment: widget.animationAlignment,
           curve: Curves.easeIn,
           duration: const Duration(milliseconds: 120),
         );
