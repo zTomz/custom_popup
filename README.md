@@ -1,6 +1,10 @@
 # Custom Popup
 
+![Custom Popup Logo](media/custom_popup_logo.png)
+
 A highly customizable popup widget, that is easy to integrate into your code.
+
+<video controls src="media/custom_popup.mp4" title="Showcase"></video>
 
 ## Features
 
