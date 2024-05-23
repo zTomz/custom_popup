@@ -4,7 +4,9 @@
 
 A highly customizable popup widget, that is easy to integrate into your code.
 
-<video controls src="media/custom_popup.mp4" title="Showcase - (Very compressed video file)"></video>
+<p align="center">
+  <img src="media/custom_popup.gif" alt="Showcase GIF" style="border-radius:16px"/>
+</p>
 
 ## Features
 
