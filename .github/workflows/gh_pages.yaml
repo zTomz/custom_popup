@@ -16,10 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Ls
-        run: |
-          ls
-
       - name: Setup Flutter
         run: |
           git clone https://github.com/flutter/flutter.git --depth 1 -b stable _flutter
@@ -32,6 +28,7 @@ jobs:
 
 
       - name: Build
+        working-directory: ./example
         run: flutter build web --release --wasm
 
       - name: Deploy
