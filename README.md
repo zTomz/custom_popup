@@ -1,11 +1,11 @@
 # Custom Popup
 
-![Custom Popup Logo](media/custom_popup_logo.png)
+![Custom Popup Logo](https://github.com/zTomz/custom_popup/raw/main/media/custom_popup_logo.png)
 
 A highly customizable popup widget, that is easy to integrate into your code.
 
 <p align="center">
-  <img src="media/custom_popup.gif" alt="Showcase GIF" style="border-radius:16px"/>
+  <img src="https://github.com/zTomz/custom_popup/raw/main/media/custom_popup.gif" alt="Showcase GIF" style="border-radius:16px"/>
 </p>
 
 ## Features
