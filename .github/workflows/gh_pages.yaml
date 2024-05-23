@@ -16,9 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Change directory to ./example
+      - name: Ls
         run: |
-          cd example
+          ls
 
       - name: Setup Flutter
         run: |
