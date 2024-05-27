@@ -1,6 +1,6 @@
+import 'package:custom_popup/custom_popup.dart';
 import 'package:flutter/material.dart';
 
-import '../src/custom_popup_theme.dart';
 
 extension CustomPopupThemeExtension on BuildContext {
   CustomPopupTheme get customPopupTheme =>

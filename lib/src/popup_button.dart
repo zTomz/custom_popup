@@ -1,7 +1,7 @@
+import 'package:custom_popup/custom_popup.dart';
 import 'package:custom_popup/extensions/theme_extension.dart';
 import 'package:custom_popup/src/close_button.dart';
 import 'package:flutter/material.dart';
-import 'package:custom_popup/custom_popup.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class CustomPopupButton extends StatefulWidget {
@@ -139,8 +139,8 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
     required Color backgroundColor,
     required CustomPopupPosition position,
   }) {
-    RenderBox iconButtonBox =
-        _iconButtonKey.currentContext?.findRenderObject() as RenderBox;
+    final RenderBox iconButtonBox =
+        _iconButtonKey.currentContext!.findRenderObject()! as RenderBox;
 
     late Offset buttonPosition;
     final Widget popupMenu = Container(
@@ -238,7 +238,7 @@ class _CustomPopupButtonState extends State<CustomPopupButton> {
     height += CustomPopupCloseButton.size;
     height += theme.spacing;
 
-    for (CustomPopupMenuElement item in widget.items) {
+    for (final CustomPopupMenuElement item in widget.items) {
       height += item.calculateWidgetHeight(context);
     }
 

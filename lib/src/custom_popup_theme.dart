@@ -1,8 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
-
 import 'package:custom_popup/custom_popup.dart';
+import 'package:flutter/material.dart';
 
 class CustomPopupTheme extends ThemeExtension<CustomPopupTheme> {
   /// Background color of the popup menu.
@@ -159,7 +158,9 @@ class CustomPopupButtonTheme extends ThemeExtension<CustomPopupButtonTheme> {
 
   @override
   CustomPopupButtonTheme lerp(
-      ThemeExtension<CustomPopupButtonTheme>? other, double t) {
+    ThemeExtension<CustomPopupButtonTheme>? other,
+    double t,
+  ) {
     if (other is! CustomPopupButtonTheme) {
       return this;
     }
