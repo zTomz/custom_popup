@@ -30,14 +30,14 @@ CustomPopupButton(
         PhosphorIcons.xCircle(),
     ),
     items: [
-        CustomPopupButtonItem(
+        CustomPopupMenuItem(
             label: 'Edit',
             icon: PhosphorIcon(
             PhosphorIcons.pencilLine(),
             ),
             onTap: () {},
         ),
-        CustomPopupButtonItem(
+        CustomPopupMenuItem(
             label: 'Duplicate',
             icon: PhosphorIcon(
                 PhosphorIcons.copy(),
@@ -46,7 +46,7 @@ CustomPopupButton(
         ),
         ...
         const CustomPopupMenuDivider(),
-        CustomPopupButtonItem(
+        CustomPopupMenuItem(
             label: 'Delete',
             icon: PhosphorIcon(
                 PhosphorIcons.trash(),

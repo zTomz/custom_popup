@@ -79,28 +79,28 @@ class CustomButton extends StatelessWidget {
         PhosphorIcons.xCircle(),
       ),
       items: [
-        CustomPopupButtonItem(
+        CustomPopupMenuItem(
           label: 'Edit',
           icon: PhosphorIcon(
             PhosphorIcons.pencilLine(),
           ),
           onTap: () {},
         ),
-        CustomPopupButtonItem(
+        CustomPopupMenuItem(
           label: 'Duplicate',
           icon: PhosphorIcon(
             PhosphorIcons.copy(),
           ),
           onTap: () {},
         ),
-        CustomPopupButtonItem(
+        CustomPopupMenuItem(
           label: 'Favorite',
           icon: PhosphorIcon(
             PhosphorIcons.heart(),
           ),
           onTap: () {},
         ),
-        CustomPopupButtonItem(
+        CustomPopupMenuItem(
           label: 'Share',
           icon: PhosphorIcon(
             PhosphorIcons.share(),
@@ -108,7 +108,7 @@ class CustomButton extends StatelessWidget {
           onTap: () {},
         ),
         const CustomPopupMenuDivider(),
-        CustomPopupButtonItem(
+        CustomPopupMenuItem(
           label: 'Delete',
           icon: PhosphorIcon(
             PhosphorIcons.trash(),

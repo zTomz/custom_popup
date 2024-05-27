@@ -7,7 +7,7 @@ sealed class CustomPopupMenuElement extends Widget {
   final double Function(BuildContext context) calculateWidgetHeight;
 }
 
-class CustomPopupButtonItem extends StatelessWidget
+class CustomPopupMenuItem extends StatelessWidget
     implements CustomPopupMenuElement {
   /// The label of the button
   final String label;
@@ -31,7 +31,7 @@ class CustomPopupButtonItem extends StatelessWidget
   final Color? backgroundColor;
 
   /// A button in the popup
-  const CustomPopupButtonItem({
+  const CustomPopupMenuItem({
     super.key,
     required this.label,
     required this.icon,
