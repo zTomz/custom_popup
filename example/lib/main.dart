@@ -78,6 +78,7 @@ class CustomButton extends StatelessWidget {
       closeIcon: PhosphorIcon(
         PhosphorIcons.xCircle(),
       ),
+      animationAlignment: animationAlignment,
       items: [
         CustomPopupMenuItem(
           label: 'Edit',
@@ -117,7 +118,6 @@ class CustomButton extends StatelessWidget {
           onTap: () {},
         ),
       ],
-      animationAlignment: animationAlignment,
     );
   }
 }

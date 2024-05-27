@@ -29,6 +29,7 @@ CustomPopupButton(
     closeIcon: PhosphorIcon(
         PhosphorIcons.xCircle(),
     ),
+    animationAlignment: Alignment.topLeft,
     items: [
         CustomPopupMenuItem(
             label: 'Edit',

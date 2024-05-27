@@ -9,4 +9,9 @@
 ## 1.0.1
 
 * CustomPopupButtonItem is now a CustomPopupMenuItem
-* Improved the 
+* Improved the readme
+
+## 1.0.1+1
+
+* Fixed changelog
+* Updated example in readme
