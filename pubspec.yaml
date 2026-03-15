@@ -1,23 +1,22 @@
 name: custom_popup
-description: "A highly customizable popup widget, which is easy to integrate with your app."
+description: "A highly customizable popup widget that is easy to integrate into your app."
 version: 1.0.1+1
-homepage:
+homepage: https://github.com/zTomz/custom_popup
 repository: https://github.com/zTomz/custom_popup
+issue_tracker: https://github.com/zTomz/custom_popup/issues
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: ^3.9.0
+  flutter: ">=3.18.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  flutter_animate: ^4.5.0
+  flutter_animate: ^4.5.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  lint: ^2.3.0
-
-flutter:
+  lint: ^2.8.0
