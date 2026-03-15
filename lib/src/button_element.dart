@@ -1,14 +1,13 @@
 import 'package:custom_popup/extensions/theme_extension.dart';
 import 'package:flutter/material.dart';
 
-sealed class CustomPopupMenuElement extends Widget {
-  const CustomPopupMenuElement(this.calculateWidgetHeight, {super.key});
+abstract class CustomPopupMenuElement extends StatelessWidget {
+  const CustomPopupMenuElement({super.key});
 
-  final double Function(BuildContext context) calculateWidgetHeight;
+  double calculateWidgetHeight(BuildContext context);
 }
 
-class CustomPopupMenuItem extends StatelessWidget
-    implements CustomPopupMenuElement {
+class CustomPopupMenuItem extends CustomPopupMenuElement {
   /// The label of the button
   final String label;
 
@@ -16,7 +15,7 @@ class CustomPopupMenuItem extends StatelessWidget
   final Widget icon;
 
   /// The function that is called when the button is pressed
-  final void Function() onTap;
+  final VoidCallback onTap;
 
   /// The height of the button, default is 35
   final double height;
@@ -44,38 +43,29 @@ class CustomPopupMenuItem extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final customPopupButtonTheme = context.customPopupTheme;
+    final popupTheme = context.customPopupTheme;
+    final buttonTheme = popupTheme.buttonTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
-    final double spacing = this.spacing ?? customPopupButtonTheme.spacing;
-    final foregroundColor =
-        this.foregroundColor ?? Theme.of(context).colorScheme.onSurface;
-    final Color backgroundColor =
-        this.backgroundColor ?? Theme.of(context).colorScheme.surface;
+    final double spacing = this.spacing ?? popupTheme.spacing;
+    final Color foregroundColor = this.foregroundColor ?? colorScheme.onSurface;
+    final Color backgroundColor = this.backgroundColor ?? colorScheme.surface;
 
     return SizedBox(
       height: height,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: customPopupButtonTheme.buttonTheme.spacing,
-        ),
+        padding: EdgeInsets.symmetric(vertical: buttonTheme.spacing),
         child: Material(
           color: backgroundColor,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.all(
-              Radius.circular(customPopupButtonTheme.buttonTheme.borderRadius),
-            ),
+            borderRadius: BorderRadius.circular(buttonTheme.borderRadius),
             child: Padding(
-              padding: EdgeInsets.all(
-                customPopupButtonTheme.buttonTheme.padding,
-              ),
+              padding: EdgeInsets.all(buttonTheme.padding),
               child: Row(
                 children: [
                   IconTheme(
-                    data: IconThemeData(
-                      size: 18,
-                      color: foregroundColor,
-                    ),
+                    data: IconThemeData(size: 18, color: foregroundColor),
                     child: icon,
                   ),
                   SizedBox(width: spacing),
@@ -97,20 +87,15 @@ class CustomPopupMenuItem extends StatelessWidget
   }
 
   @override
-  double Function(BuildContext context) get calculateWidgetHeight =>
-      (_) => height;
+  double calculateWidgetHeight(BuildContext context) => height;
 }
 
-class CustomPopupMenuDivider extends StatelessWidget
-    implements CustomPopupMenuElement {
+class CustomPopupMenuDivider extends CustomPopupMenuElement {
   /// The height of the divider. Default to 1
   final double height;
 
   /// Used to divide the items in the menu
-  const CustomPopupMenuDivider({
-    super.key,
-    this.height = 1,
-  });
+  const CustomPopupMenuDivider({super.key, this.height = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +114,6 @@ class CustomPopupMenuDivider extends StatelessWidget
   }
 
   @override
-  double Function(BuildContext context) get calculateWidgetHeight =>
-      (context) => height + context.customPopupTheme.itemSpacing * 2;
+  double calculateWidgetHeight(BuildContext context) =>
+      height + context.customPopupTheme.itemSpacing * 2;
 }

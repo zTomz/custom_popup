@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomPopupCloseButton extends StatelessWidget {
   final Widget icon;
-  final void Function() onClose;
+  final VoidCallback onClose;
 
   const CustomPopupCloseButton({
     super.key,

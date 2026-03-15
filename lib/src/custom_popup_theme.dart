@@ -1,7 +1,14 @@
 import 'dart:ui';
 
-import 'package:custom_popup/custom_popup.dart';
 import 'package:flutter/material.dart';
+
+enum CustomPopupPosition {
+  /// If the popup is positioned relative to the button
+  relative,
+
+  /// If the popup is positioned centered on the screen like a dialog
+  centered,
+}
 
 class CustomPopupTheme extends ThemeExtension<CustomPopupTheme> {
   /// Background color of the popup menu.
@@ -97,11 +104,7 @@ class CustomPopupTheme extends ThemeExtension<CustomPopupTheme> {
       position: other.position,
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       width: lerpDouble(width, other.width, t)!,
-      buttonRadius: lerpDouble(
-        buttonRadius,
-        other.buttonRadius,
-        t,
-      )!,
+      buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
       borderRadius: lerpDouble(borderRadius, other.borderRadius, t)!,
       itemSpacing: lerpDouble(itemSpacing, other.itemSpacing, t)!,
       spacing: lerpDouble(spacing, other.spacing, t)!,
@@ -109,7 +112,7 @@ class CustomPopupTheme extends ThemeExtension<CustomPopupTheme> {
     );
   }
 
-  CustomPopupTheme.fallback() : this();
+  const CustomPopupTheme.fallback() : this();
 }
 
 class CustomPopupButtonTheme extends ThemeExtension<CustomPopupButtonTheme> {
