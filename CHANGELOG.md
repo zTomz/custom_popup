@@ -1,3 +1,9 @@
+## 1.1.0
+
+* Refactored popup internals to resolve style values consistently for layout and positioning
+* Simplified popup menu element internals and callback types
+* Added widget tests for popup positioning, styling, and close behavior
+
 ## 1.0.0
 
 * Initial release
